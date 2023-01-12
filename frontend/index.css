@@ -1,0 +1,51 @@
+html {
+    font-family: sans-serif;
+}
+
+.header {
+    padding: 10px;
+    text-align: center;
+    background: #23e5be;
+    color: white;
+    font-family: sans-serif;
+    font-size: 30px;
+  }
+
+.menu {
+    background: grey;
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+#LoginButton {
+    text-align: center;
+    float: right;
+    background: grey;
+    border: 0px;
+}
+
+#filterBar {
+    padding: 10px;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.messageBox {
+    padding: 10px;
+    border: 2px;
+    border-style: groove;
+}
+
+.messageTitel {
+    font-size: medium;
+    padding: 0%;
+}
+
+.messageInfo {
+    font-weight: normal;
+    float: right;
+}
+
+/* .message {
+    padding: 0%;
+} */
