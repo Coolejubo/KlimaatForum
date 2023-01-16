@@ -1,0 +1,53 @@
+/* Css file voor de homepagina
+
+Dit is de css voor de volgende en vorige pagina knoppen */
+
+.pageBar{
+    width: 130px;
+    margin: auto;
+ }
+ .pageBar a {
+     text-decoration: none;
+     display: inline-block;
+     padding: 8px 16px;
+     margin: 10px;
+ }
+ 
+ .pageBar a:hover {
+     background-color: #ddd;
+     color: black;
+   }
+   
+ .pageBar .previous {
+     background-color: #e9e9e9;
+     color: black;
+   }
+   
+ .pageBar  .next {
+     background-color: #e9e9e9;
+     color: black;
+   }
+   
+ .pageBar .round {
+     border-radius: 50%;
+ }
+ 
+ .messageBox {
+     margin-top: 10px;
+     padding: 10px;
+     border: 2px;
+     border-radius: 10px;
+     border-style: groove;
+ }
+ 
+ .messageTitel {
+     padding: 0%;
+     font-size: 20px;
+ }
+ 
+ .messageInfo {
+     font-weight: normal;
+     float: right;
+ }
+ 
+ 
