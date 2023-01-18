@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="header">
-            <h1>Levis</h1>
+            <h1>Enviromental Forum</h1>
         </div>
 
         <div class="topnav">
@@ -25,3 +25,5 @@
             <a href="https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php">Sign Up</a>
             <input class="searchBar" type="text" placeholder="Search..">
         </div>
+    </body>
+</html>
