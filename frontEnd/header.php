@@ -1,6 +1,6 @@
 <?php
 
-
+    session_start();
 
 ?>
 
@@ -21,9 +21,17 @@
             <a href="https://webtech-ki46.webtech-uva.nl">Home</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
-            <a href="https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/login.php">Login</a>
-            <a href="https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php">Sign Up</a>
+            <?php 
+            if (isset($_SESSION['username'])) {
+                echo '<a href="https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php">Profile</a>';
+                echo '<a href="https://webtech-ki46.webtech-uva.nl/frontEnd/createthread/create_thread.php">Post</a>';
+                echo '<a href="https://webtech-ki46.webtech-uva.nl/backEnd/includes/logout.inc.php">Log out</a>';
+            } 
+            else {
+                echo '<a href="https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/login.php">Log in</a>';
+                echo '<a href="https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php">Sign Up</a>';
+    
+            }
+            ?>
             <input class="searchBar" type="text" placeholder="Search..">
         </div>
-    </body>
-</html>

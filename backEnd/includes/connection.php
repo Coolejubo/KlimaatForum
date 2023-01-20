@@ -1,9 +1,9 @@
 <?php
 
     $servername = 'localhost';
-    $username = 'huuba';
+    $adminname = 'huuba';
     $password =  'nSIxDXPZDHfhVsPXiryUFAcHhWKJSCQG';
-    $database = 'KlimaatForum';
+    $database = "KlimaatForum";
 
-    $connection = new mysqli($servername, $username, $password, $database);
-    
+    $connection = new mysqli($servername, $adminname, $password, $database);
+    // $conn->close(); wie de fuck
