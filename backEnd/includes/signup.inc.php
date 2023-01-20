@@ -39,8 +39,8 @@ if (isset($_POST['submit'])) {
     // $psw = 'aqui';
     // $pswrepeat = $psw;
     
-    include 'connection.php';
-    include 'functions.inc.php';
+    require_once 'connection.php';
+    require_once 'functions.inc.php';
 
     if (emptyInputsSignup($username, $email, $psw, $pswrepeat) !== false ) {
         header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php?error=emptyInput');
@@ -51,6 +51,16 @@ if (isset($_POST['submit'])) {
         header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php?error=pswsDontMatch');
         exit();
     }
+    // DEBUG
+
+    // $result = userExists($connection, $username, $email);
+    // if (!$result) {
+    //     print('leeg');
+    // } else {
+    //     print('bruh');
+    // }
+
+
     if (userExists($connection, $username, $email) !== false ) {
         header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php?error=usernameExists');
         exit();
@@ -59,5 +69,5 @@ if (isset($_POST['submit'])) {
     createUser($connection, $username, $email, $psw);
 }
 else {
-    header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/login.php');
+    header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php');
 }
