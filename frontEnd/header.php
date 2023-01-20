@@ -14,6 +14,7 @@
     </head>
     <body>
         <div class="header">
+                <img src="img/logo2.png" alt="">
             <h1>Enviromental Forum</h1>
         </div>
 
@@ -24,7 +25,7 @@
             <?php 
             if (isset($_SESSION['username'])) {
                 echo '<a href="https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php">Profile</a>';
-                echo '<a href="https://webtech-ki46.webtech-uva.nl/frontEnd/createthread/create_thread.php">Post</a>';
+                echo '<a href="https://webtech-ki46.webtech-uva.nl/frontEnd/createPost/createPost.php">Post</a>';
                 echo '<a href="https://webtech-ki46.webtech-uva.nl/backEnd/includes/logout.inc.php">Log out</a>';
             } 
             else {
