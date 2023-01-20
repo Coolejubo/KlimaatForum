@@ -1,4 +1,4 @@
 <?php
-$password = 'hallo';
+$password = time();
 
-print($password);
+print($password.'bruh'.'aqui');

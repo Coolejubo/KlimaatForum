@@ -95,6 +95,28 @@ function createUser($connection, $username, $email, $psw) {
     exit();
 }
 
+function createPost($connection, $title, $content, $userID) {
+
+    //Prepare Query
+    $query = 'INSERT INTO posts (userID, postTitle, postContent) VALUES (?, ?, ?);';
+    $stmt = mysqli_prepare($connection, $query);
+
+    //check if the statement doesnt fail
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/createPost/createPost.php?error=smtmFailed');
+        exit();
+    }
+
+    //execute query
+
+    mysqli_stmt_bind_param($stmt,"iss", $userID, $title, $content);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header('location: https://webtech-ki46.webtech-uva.nl?error=none');
+    exit();
+
+}
+
 function loginUser($connection, $username, $psw) {
     // check of de gebruiker in de database staat
     // gebruiker kan beide user en email invullen!
@@ -116,6 +138,8 @@ function loginUser($connection, $username, $psw) {
     else if ($checkPsw === true) {
         session_start();
         $_SESSION['username'] = $uidExists['username'];
+        $_SESSION['email'] = $uidExists['email'];
+        $_SESSION['userID'] = $uidExists['userID'];
         header('location: https://webtech-ki46.webtech-uva.nl?session=started');
     }
 }
