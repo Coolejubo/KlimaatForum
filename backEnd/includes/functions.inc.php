@@ -10,6 +10,16 @@ function emptyInputsSignup($username, $email, $psw, $pswrepeat) {
     return $result;
 }
 
+function emptyInputsLogin($username, $psw) {
+
+    if (empty($username) || empty($psw)) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
+}
+
 function pswMatch($psw, $pswrepeat) {
 
     if ($psw == $pswrepeat) {
@@ -56,14 +66,15 @@ function userExists($connection, $username, $email) {
         $result = false;
         return $result;
     }
+
     mysqli_stmt_close($stmt);
 }
 
 //DEBUG
 
-include 'connection.php';
+// include 'connection.php';
 
-userExists($connection, 'huuba', 'hallo@kut.nl');
+// userExists($connection, 'huuba', 'hallo@kut.nl');
 
 function createUser($connection, $username, $email, $psw) {
 
@@ -80,8 +91,57 @@ function createUser($connection, $username, $email, $psw) {
     mysqli_stmt_bind_param($stmt, 'sss', $username, $email, $hashedPassword);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header('location: https://webtech-ki46.webtech-uva.nl');
+    header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php?error=none');
     exit();
+}
+
+function createPost($connection, $title, $content, $userID) {
+
+    //Prepare Query
+    $query = 'INSERT INTO posts (userID, postTitle, postContent) VALUES (?, ?, ?);';
+    $stmt = mysqli_prepare($connection, $query);
+
+    //check if the statement doesnt fail
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/createPost/createPost.php?error=smtmFailed');
+        exit();
+    }
+
+    //execute query
+
+    mysqli_stmt_bind_param($stmt,"iss", $userID, $title, $content);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header('location: https://webtech-ki46.webtech-uva.nl?error=none');
+    exit();
+
+}
+
+function loginUser($connection, $username, $psw) {
+    // check of de gebruiker in de database staat
+    // gebruiker kan beide user en email invullen!
+    $uidExists = userExists($connection, $username, $username);
+
+    if ($uidExists === false) {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/login.php?error=userInvalid');
+        exit();
+    }
+
+    $HashedPswDB = $uidExists['password'];
+
+    $checkPsw = password_verify($psw, $HashedPswDB);
+
+    if ($checkPsw === false) {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/login.php?error=passwordInvalid');
+        exit();
+    }
+    else if ($checkPsw === true) {
+        session_start();
+        $_SESSION['username'] = $uidExists['username'];
+        $_SESSION['email'] = $uidExists['email'];
+        $_SESSION['userID'] = $uidExists['userID'];
+        header('location: https://webtech-ki46.webtech-uva.nl?session=started');
+    }
 }
 
 // DEBUG
