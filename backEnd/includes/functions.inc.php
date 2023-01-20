@@ -97,8 +97,10 @@ function createUser($connection, $username, $email, $psw) {
 
 function createPost($connection, $title, $content, $userID) {
 
+    //time in UNIX (seconden vanaf 1970)
+    $time = time();
     //Prepare Query
-    $query = 'INSERT INTO posts (userID, postTitle, postContent) VALUES (?, ?, ?);';
+    $query = 'INSERT INTO posts (userID, postTitle, postContent, postDate) VALUES (?, ?, ?, ?);';
     $stmt = mysqli_prepare($connection, $query);
 
     //check if the statement doesnt fail
@@ -109,7 +111,7 @@ function createPost($connection, $title, $content, $userID) {
 
     //execute query
 
-    mysqli_stmt_bind_param($stmt,"iss", $userID, $title, $content);
+    mysqli_stmt_bind_param($stmt,"issi", $userID, $title, $content, $time);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header('location: https://webtech-ki46.webtech-uva.nl?error=none');
