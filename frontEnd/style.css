@@ -5,6 +5,10 @@ html {
     font-size: 20px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* Dit is de styling voor de header die bovenaan elke
 pagina staat, het is belangrijk dat deze responsive is,
 dus je moet werken met size: #vw ofzo. */
@@ -12,11 +16,8 @@ dus je moet werken met size: #vw ofzo. */
 
 .header {
     padding: 10px;
-    border: 4px;
-    border-radius: 10px;
-    border-color: white;
     text-align: center;
-    background: #23e5be;
+    background: hsl(138, 93%, 35%);
     color: white;
     font-size: 4vw;
   }

@@ -4,29 +4,31 @@
 
 ?>
 
-<form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/login.inc.php" method="post">
+	<form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/login.inc.php" method='post'>
+		<input type='text' name="username" placeholder="username/email">
+		<input type='text' name="password" placeholder="password">
+		<button type="submit" name="submit">Sign Up </button>
+	</form>
 
-	<div class="container">
-		<label for="uname"><b>Username</b></label>
-		<input class="loginInput" type="text" placeholder="Enter Username" name="uname" required>
+<?php
 	
-		<label for="psw"><b>Password</b></label>
-		<input class="loginInput" type="password" placeholder="Enter Password" name="psw" required>
-	
-		<button type="submit">Login</button>
-		<label>
-			<input type="checkbox" checked="checked" name="remember"> Remember me
-		</label>
-	</div>
-	
-	<div class="container" style="background-color:#f1f1f1">
-		<button type="button" class="cancelbtn">Cancel</button>
-		<span class="psw">Forgot <a href="#">password?</a></span>
-		<span class="psw">Don't have an account yet? <a href="https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php">
-			Sign Up </a></span>
-	</div>
+if (isset($_GET["error"])) {
+	if ($_GET["error"] == "emptyInput") {
+		echo "<p>Fill in all fields!<?p>";
+	}
+	else if ($_GET["error"] == "smtm1Failed") {
+		echo "<p>Something went wrong with the SQL statement when looking up a user.</p>";
+	}
+	else if ($_GET["error"] == "userInvalid") {
+		echo "<p>The username or email is not registered.<?p>";
+	}
+	else if ($_GET["error"] == "passwordInvalid") {
+		echo "<p>The password is not valid.<?p>";
+	}
 
-</form>
+}
+?>
+
         
 
 <?php 
