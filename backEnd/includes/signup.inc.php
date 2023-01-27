@@ -29,10 +29,11 @@
 //if statements die de gebruiker terugstuurd naar de signup pagina
 if (isset($_POST['submit'])) {
 
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $psw = $_POST['password'];
-    $pswrepeat = $_POST['psw-repeat'];
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
+    $about = htmlspecialchars($_POST['about']);
+    $psw = htmlspecialchars($_POST['password']);
+    $pswrepeat = htmlspecialchars($_POST['psw-repeat']);
 
     // $username = 'aqui';
     // $email = 'aqui';
@@ -66,7 +67,7 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-    createUser($connection, $username, $email, $psw);
+    createUser($connection, $username, $email, $about, $psw);
 }
 else {
     header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php');

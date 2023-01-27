@@ -3,30 +3,24 @@
     include_once 'frontEnd/header.php'
 
 ?>
-    
-    <!-- <div class="row">
-      <div class="column">
-        <h2>Column</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
-      </div>
-      
-      <div class="column">
-        <h2>Column</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
-      </div> -->
-      
+<!-- include styling for this page. -->
+<head>
+    <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/homePage/home.css">
+    <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.css">
+</head>
+<div class="pageBar">
+    <a href="#" class="previous round">&#8249;</a>
+    <a href="#" class="next round">&#8250;</a>
+</div>
 
-      <div class="pageBar">
-            <a href="#" class="previous round">&#8249;</a>
-            <a href="#" class="next round">&#8250;</a>
-        </div>
+<?php 
 
-        <?php 
+    require_once 'backEnd/includes/showPostsFunctions.php';
+    require_once 'backEnd/includes/connection.php';
+    $array = tenLatestPosts($connection);
+    showPosts($array, $connection);
 
-            require_once 'backEnd/includes/showPostsFunctions.php';
-            showLatestPosts();
-
-        ?>
+?>
 
 <?php 
 

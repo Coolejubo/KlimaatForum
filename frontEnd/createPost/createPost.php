@@ -3,6 +3,7 @@
     include_once '../header.php'
 
 ?>
+
 <div class="createPost">
 
     <form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/createPost.inc.php" method="post">

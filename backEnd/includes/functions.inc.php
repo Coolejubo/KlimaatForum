@@ -1,7 +1,6 @@
 <?php
 
 function emptyInputsSignup($username, $email, $psw, $pswrepeat) {
-
     if (empty($username) || empty($email) || empty($psw) || empty($pswrepeat)) {
         $result = true;
     } else {
@@ -146,25 +145,105 @@ function loginUser($connection, $username, $psw) {
     }
 }
 
+function emptyInputsEdit($username, $email, $about) {
+    if (empty($username) || empty($email) || empty($about)) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
+}
+
+function userExistsEdit($connection, $username, $email, $user_id) {
+    $query = 'SELECT * FROM users WHERE (username = ? OR email = ?) AND id != ?;';
+    $stmt = mysqli_stmt_init($connection);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/edit_profile.php?error=smtmFailed');
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, 'ssi', $username, $email, $user_id);
+    mysqli_stmt_execute($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($resultData) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+    mysqli_stmt_close($stmt);
+}
+
+
+
+function editUser($connection, $username, $email, $about, $user_id) {
+    $query = 'UPDATE users SET username = ?, email = ?, about = ?';
+    $params = array($username, $email, $about);
+    $query .= ' WHERE id = ?';
+    $params[] = $user_id;
+    $stmt = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($stmt, 'sssi', ...$params);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/edit_profile.php?error=none');
+    exit();
+}
+
+function like($referenceID, $userID, $post, $connection) {
+    
+    if ($post == 1) {
+        //insert like into likes
+        $query = "INSERT INTO likes (userID, referenceID, post) VALUES ($userID, $referenceID, 1);";
+        mysqli_query($connection, $query);
+
+        //update like amount in the posts database
+        $query = "UPDATE posts SET postLikes = postLikes + 1 WHERE postID = $referenceID";
+        return mysqli_query($connection, $query);
+    }
+}
+
+function unlike($referenceID, $userID, $post, $connection) {
+    
+    if ($post == 1) {
+        // remove like
+        $query = "DELETE FROM `likes` WHERE userID = $userID AND referenceID = $referenceID AND post = 1;";
+        mysqli_query($connection, $query);
+
+        //update like amount in the posts database
+        $query = "UPDATE posts SET postLikes = postLikes - 1 WHERE postID = $referenceID";
+        return mysqli_query($connection, $query);
+    }
+}
+
+
+
+function displayComments($comments, $postID) {
+    foreach ($comments as $comment) {
+        echo '<div class="parent-comment">';
+        echo '<p>' . $comment['responseContent'] . '</p>';
+        echo '<p>' . $comment['username'] . '</p>';
+        echo '<p>' . $comment['responseDate'] . '</p>';
+        echo '<p>' . $comment['postID'] . '</p>';
+        echo '<form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/createComment.inc.php" method="post">';
+        echo '<label for="responseContent">reply:</label>';
+        echo '<br>';
+        echo '<textarea id="responseContent" name="responseContent"></textarea>';
+        echo '<br>';
+        echo '<input type="hidden" id="postID" name="postID" value="'.$postID.'">';
+        echo '<input type="hidden" id="parentID" name="parentID" value="'.$comment['responseID'].'">';
+        echo '<input type="submit" value="Submit">';
+        echo '</form>';
+        if(!empty($comment['children'])) {
+            echo '<div class="children-comments">';
+            displayComments($comment['children'], $postID);
+            echo '</div>';
+        }
+        echo '</div>';
+    }
+}
+
+
 // DEBUG
 
-// if (emptyInputsSignup('asf','sadf','bruh','sd')) {
-//     print('Deze is fout');
-// }
-// else {
-//     print('Deze is goed');
-// }
+// require_once 'connection.php';
 
-
-// $test1 = 'bruh';
-// $test2 = $test1;
-
-// if ((pswMatch($test1, $test2 ) === false)) {
-//     print('Deze is fout');
-// }
-// if ((pswMatch($test1, $test2) === true)) {
-//     print('Deze is goed');
-// }
-// else {
-//     print('Iets Anders');
-// }
+// unlike(11, 27, 1, $connection);

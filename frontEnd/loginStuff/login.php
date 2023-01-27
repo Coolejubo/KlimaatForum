@@ -6,7 +6,7 @@
 
 	<form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/login.inc.php" method='post'>
 		<input type='text' name="username" placeholder="username/email">
-		<input type='text' name="password" placeholder="password">
+		<input type='password' name="password" placeholder="password">
 		<button type="submit" name="submit">Sign Up </button>
 	</form>
 
