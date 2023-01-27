@@ -1,0 +1,66 @@
+.threadBox {
+    margin: 30px;
+    margin-left: 150px;
+    margin-right: 150px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 2px solid hsl(138, 93%, 35%);
+    border-radius: 5px;
+    background-color: rgb(245, 245, 245);
+}
+
+.threadTitle {
+    padding-bottom: 20px;
+    border-bottom: 2px solid hsl(138, 93%, 35%);
+}
+
+.commentBox {
+
+    margin-left: 150px;
+    margin-right: 150px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 2px solid hsl(138, 93%, 35%);
+    border-radius: 5px;
+    background-color: rgb(245, 245, 245);
+    width: 1050px;
+    padding-top: 10px;
+}
+
+.commentBoxLabel {
+    font-size: 15px;
+    margin-left: 150px;
+}
+
+.commentsHeader {
+    margin-left: 150px;
+}
+
+.comments {
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.parent-comment {
+    padding: 20px;
+    border: 1px solid hsl(138, 93%, 35%);
+    border-radius: 5px;
+    background-color: rgb(245, 245, 245);
+    margin-bottom: 20px;
+}
+
+.children-comments {
+    margin-left: 20px;
+}
+
+.child-comment {
+    padding: 10px;
+    border: 1px solid hsl(138, 93%, 35%);
+    border-radius: 5px;
+    background-color: rgb(245, 245, 245);
+    margin-bottom: 10px;
+}
+
+.hide {
+    display: none;
+}

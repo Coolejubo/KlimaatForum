@@ -16,9 +16,9 @@ if (isset($_POST['submit'])) {
     // $userID = 999;
 
     //grab data
-    $title = $_POST["title"];
-    $content = $_POST["content"];
-    $userID = $_SESSION["userID"];
+    $title = htmlspecialchars($_POST["title"]);
+    $content = htmlspecialchars($_POST["content"]);
+    $userID = htmlspecialchars($_SESSION["userID"]);
 
     //we gebruiken de login functie, omdat die ook twee inputs heeft.
     if (emptyInputsLogin($title, $content) === true) {
