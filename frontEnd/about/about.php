@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>The Catalysts for Change - About</title>
-</head>
-<body>
-    <header>
-        <?php 
-        include_once '../header.php'
-        ?>
-    </header>
+<?php 
+
+    include_once '../header.php'
+
+?>
     <main>
         <h2>About Us</h2>
         <p>The Catalysts for Change is an online community dedicated to raising awareness and promoting positive change for the environment. We believe that every individual has the power to make a difference, and it is through collective action and support that real progress can be made.</p>
@@ -18,5 +13,9 @@
     <footer>
         <p>Copyright ©2023 The Catalysts for Change</p>
         </footer>
-</body>
-</html>
+
+<?php 
+
+include_once '../footer.php'
+
+?>

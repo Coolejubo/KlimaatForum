@@ -30,37 +30,47 @@ function showPosts($post, $connection) {
     //maak een for loop die door alle post heen loopt en ze 
     // een voor een echod naar de html code.
     for ($x = ($lim - 1); $x >= 0; $x--) {
-        echo '<div class="messageBox"'; 
-        echo        '<h1>'.$post[$x][2].'</h1>';
-        echo        '<p>'.fetchUsername($post[$x][0], $connection).'</p>';  
-        echo        '<p>'.date("d-m-Y H:i", $post[$x][4]).'</p>';
-        echo        '<p>'.$post[$x][3].'</p>';
-
-        if (isset($_SESSION['userID'])) {
-            ?>
-            <form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/like.inc.php" method="post">
-                <input type="hidden" name="postID" value="<?php echo $post[$x][1]?>">
-                <?php 
-                    if (hasLiked($post[$x][1], $_SESSION['userID'], $connection, 1)) {
+        ?>
+        <div class="message-container">
+            <div class="message-header">
+                <h1 class="message-title"><?php echo $post[$x][2] ?></h1>
+                <div class="message-meta">
+                    <span class="username"><?php echo fetchUsername($post[$x][0], $connection) ?></span>
+                    <span class="date"><?php echo date("d-m-Y H:i", $post[$x][4]) ?></span>
+                </div>
+            </div>
+            <div class="message-content"><?php echo $post[$x][3] ?></div>
+            <div class="message-footer">
+                <div class="message-likes">
+                    <?php
+                    if (isset($_SESSION['userID'])) {
                         ?>
-                        <input type="hidden" name="likeValue" value="unlike">
-                        <button type="submit" name="submit">Unlike</button>
-                        <?php
-                    } 
-                    else {
-                        ?>
-                        <input type="hidden" name="likeValue" value="like">
-                        <button type="submit" name="submit">Like</button>
-                        <?php
+                        <form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/like.inc.php" method="post" class="like-form">
+                            <input type="hidden" name="postID" value="<?php echo $post[$x][1]?>">
+                            <?php 
+                                if (hasLiked($post[$x][1], $_SESSION['userID'], $connection, 1)) {
+                                    ?>
+                                    <input type="hidden" name="likeValue" value="unlike">
+                                    <button type="submit" name="submit" class="unlike-btn"></button>
+                                    <?php
+                                } 
+                                else {
+                                    ?>
+                                    <input type="hidden" name="likeValue" value="like">
+                                    <button type="submit" name="submit" class="like-btn"></button>
+                                    <?php
+                                }
+                            ?>
+                        </form>
+                    <?php 
                     }
-                    ?>
-                <span class="like-count"><?php echo $post[$x][5]; ?></span>
-            </form>
-
-            <?php 
-        }
-        echo '<a href="https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.php?id='.$post[$x][1].'">comments</a>';
-        echo '</div>';
+                    ?>   
+                    <span class="like-count"><?php echo $post[$x][5]; ?> Likes</span>
+                </div>
+                <a class="message-comments" href="https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.php?id=<?php echo $post[$x][1] ?>" class="comments-btn">comments</a>
+            </div>
+        </div>
+        <?php
     }
 }
 
