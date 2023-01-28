@@ -13,14 +13,14 @@
     <a href="#" class="next round">&#8250;</a>
 </div>
 
-<?php 
-
+<div class="messages">
+    <?php 
     require_once 'backEnd/includes/showPostsFunctions.php';
     require_once 'backEnd/includes/connection.php';
     $array = tenLatestPosts($connection);
     showPosts($array, $connection);
-
-?>
+    ?>
+</div>
 
 <?php 
 
