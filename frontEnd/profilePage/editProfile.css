@@ -1,0 +1,87 @@
+img {
+    width: 250px;
+    height: 250px;
+}
+
+.user-info {
+    width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .user-details {
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+  }
+  
+  .user-avatar {
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  
+  .user-avatar img {
+    width: 100%;
+  }
+  
+  .editButtonDiv {
+    width: 600px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .edit-button {
+    width: 100%;
+    border: none;
+    padding: 15px;
+    border-radius: 50px;
+    background-color: darkgreen;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px; 
+  }
+
+.edit-button:hover {
+    cursor: pointer;
+  }
+.edit-form {
+  padding-top: 10px;
+}
+
+.edit-form h1{
+
+    padding-left: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+.edit-form input{
+  width: 100%;
+    padding: 14px;
+    border: none;
+    font-size: 20px;
+    color: black;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.edit-form button {
+  width: 100%;
+  border: none;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 50px;
+  background-color: darkgreen;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 20px; 
+}
+.edit-form button:hover{
+  cursor: pointer;
+}
+
+
+
+
+  

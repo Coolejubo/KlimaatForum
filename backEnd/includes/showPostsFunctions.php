@@ -1,10 +1,34 @@
 <?php
 
-function tenLatestPosts($connection) {
-    $result = mysqli_query($connection, 'SELECT * FROM posts ORDER BY postDate LIMIT 10;');
+function tenLatestPosts($connection, $page) {
+    // Deze functie returned de hoeveelheid paginas die er zijn
+    // maximaal tien.
+    if ($page > 0) {
+        $offset = ($page * 10);
+    } else {
+        $offset = 0;
+    }
+    $result = mysqli_query($connection, 'SELECT * FROM posts ORDER BY postDate DESC LIMIT 10 OFFSET '.$offset.';');
     $result = mysqli_fetch_all($result, MYSQLI_NUM);
     return $result;
 }
+
+function tenBestPosts($connection, $page) {
+    if ($page > 0) {
+        $offset = ($page * 10);
+    } else {
+        $offset = 0;
+    }
+    $result = mysqli_query($connection, 'SELECT * FROM posts ORDER BY postLikes DESC LIMIT 10 OFFSET '.$offset.';');
+    $result = mysqli_fetch_all($result, MYSQLI_NUM);
+    return $result;
+}
+
+//DEBUG
+
+// require_once 'connection.php';
+
+// echo count(tenLatestPosts($connection, 1));
 
 function fetchUsername($userID, $connection) {
 
@@ -27,9 +51,9 @@ function showPosts($post, $connection) {
 
     $lim = count($post);
     
-    //maak een for loop die door alle post heen loopt en ze 
+    //maak een for loop die door alrle post heen loopt en ze 
     // een voor een echod naar de html code.
-    for ($x = ($lim - 1); $x >= 0; $x--) {
+    for ($x = 0; $x <= ($lim - 1); $x++) {
         ?>
         <div class="message-container">
             <div class="message-header">
@@ -37,6 +61,7 @@ function showPosts($post, $connection) {
                 <div class="message-meta">
                     <span class="username"><?php echo fetchUsername($post[$x][0], $connection) ?></span>
                     <span class="date"><?php echo date("d-m-Y H:i", $post[$x][4]) ?></span>
+                    <img class="profilePic" src="https://api.multiavatar.com/<?php echo fetchUsername($post[$x][0], $connection) ?>.png?apikey=FgC5ls0LaUYoKd">
                 </div>
             </div>
             <div class="message-content"><?php echo $post[$x][3] ?></div>
@@ -65,7 +90,17 @@ function showPosts($post, $connection) {
                     <?php 
                     }
                     ?>   
-                    <span class="like-count"><?php echo $post[$x][5]; ?> Likes</span>
+                    <span class="like-count">
+                        <?php 
+                            echo $post[$x][5];
+                            if ($post[$x][5] == 1) {
+                                echo ' Like';
+                            }
+                            else {
+                                echo ' Likes';
+                            }
+                        ?> 
+                    </span>
                 </div>
                 <a class="message-comments" href="https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.php?id=<?php echo $post[$x][1] ?>" class="comments-btn">comments</a>
             </div>

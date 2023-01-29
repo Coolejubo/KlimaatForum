@@ -69,14 +69,13 @@
         function displayComments($reply_chains, $postID) {
             foreach ($reply_chains as $comment) {
                 echo '<div class="parent-comment">';
-                echo '<p>' . $comment['responseContent'] . '</p>';
-                echo '<p>' . $comment['username'] . '</p>';
-                echo '<p>' . $comment['responseDate'] . '</p>';
-                echo '<p>' . $comment['postID'] . '</p>';
-                echo '<form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/createComment.inc.php" method="post">';
-                echo '<label for="responseContent">reply:</label>';
+                echo '<p class="responseDate">' . $comment['responseDate'] . '</p>';
+                echo '<p class="responseUser"> ' . $comment['username'] . '</p>';
+                echo '<p class="responseContent">' . $comment['responseContent'] . '</p>';
+                echo '<button class="reply-button">Reply</button>';
+                echo '<form style="display:none;" class="reply-form" action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/createComment.inc.php" method="post">';
                 echo '<br>';
-                echo '<textarea id="responseContent" name="responseContent"></textarea>';
+                echo '<textarea name="responseContent" class="responseBox"></textarea>';
                 echo '<br>';
                 echo '<input type="hidden" id="postID" name="postID" value="'.$postID.'">';
                 echo '<input type="hidden" id="parentID" name="parentID" value="'.$comment['responseID'].'">';
@@ -100,7 +99,13 @@
             <?php displayComments($reply_chains, $postID); ?>
         </div>
 
-        <script src="js/posts.js"></script>
+        <script>
+            document.querySelectorAll(".reply-button").forEach(function(button){
+                button.addEventListener("click", function(){
+                    this.nextElementSibling.style.display = "block";
+                });
+            });
+        </script>
     
         <?php
 

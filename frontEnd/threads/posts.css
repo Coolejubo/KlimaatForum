@@ -42,7 +42,10 @@
 }
 
 .parent-comment {
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
     border: 1px solid hsl(138, 93%, 35%);
     border-radius: 5px;
     background-color: rgb(245, 245, 245);
@@ -51,16 +54,62 @@
 
 .children-comments {
     margin-left: 20px;
-}
-
-.child-comment {
-    padding: 10px;
-    border: 1px solid hsl(138, 93%, 35%);
-    border-radius: 5px;
-    background-color: rgb(245, 245, 245);
-    margin-bottom: 10px;
+    
 }
 
 .hide {
     display: none;
 }
+
+.responseUser {
+    color: hsl(138, 93%, 35%);
+}
+
+.responseDate {
+    float: right;
+    font-size: 15px;
+}
+
+
+
+.reply-button {
+    display: inline-block;
+    border: none;
+    padding: 5px;
+    text-decoration: none;
+    background: hsl(138, 93%, 35%);
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+                border-radius: 5px;
+}
+
+.reply-button:hover,
+.reply-button:focus {
+    background: hsl(138, 36%, 53%);;
+}
+
+.reply-button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+.reply-button:active {
+    transform: scale(0.99);
+}
+
+.responseBox {
+    width: 50%;
+    height: 50px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    border: 2px solid hsl(138, 93%, 35%);
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+  }
