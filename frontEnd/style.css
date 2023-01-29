@@ -44,6 +44,16 @@ dus je moet werken met size: #vw ofzo. */
     padding: 14px;
     text-decoration: none;
 }
+
+.topnav form {
+    float: left;
+    display: block;
+    color: white;
+    border-radius: 28px;
+    text-align: left;
+    text-decoration: none;
+    width: auto;
+}
   
 /* Change the color of links on hover */
 .topnav a:hover {
@@ -74,7 +84,6 @@ dus je moet werken met size: #vw ofzo. */
   
   /* Style the search box inside the navigation bar */
 .topnav .searchBar {
-    float: right;
     background-color: darkgreen;
     padding: 14px;
     border: none;

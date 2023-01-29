@@ -154,37 +154,17 @@ function emptyInputsEdit($username, $email, $about) {
     return $result;
 }
 
-function userExistsEdit($connection, $username, $email, $user_id) {
-    $query = 'SELECT * FROM users WHERE (username = ? OR email = ?) AND id != ?;';
-    $stmt = mysqli_stmt_init($connection);
 
-    if (!mysqli_stmt_prepare($stmt, $query)) {
-        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/edit_profile.php?error=smtmFailed');
-        exit();
-    }
+function editUser($connection, $username, $email, $user_id) {
+    $query = 'UPDATE users SET username = ?, email = ? WHERE userID = ?;';
+    $stmt = mysqli_prepare($connection, $query);
     mysqli_stmt_bind_param($stmt, 'ssi', $username, $email, $user_id);
     mysqli_stmt_execute($stmt);
-    $resultData = mysqli_stmt_get_result($stmt);
-    if (mysqli_num_rows($resultData) > 0) {
-        return true;
-    } else {
-        return false;
-    }
+    $_SESSION['username'] = $username;
+    $_SESSION['email'] = $email;
     mysqli_stmt_close($stmt);
-}
 
-
-
-function editUser($connection, $username, $email, $about, $user_id) {
-    $query = 'UPDATE users SET username = ?, email = ?, about = ?';
-    $params = array($username, $email, $about);
-    $query .= ' WHERE id = ?';
-    $params[] = $user_id;
-    $stmt = mysqli_prepare($connection, $query);
-    mysqli_stmt_bind_param($stmt, 'sssi', ...$params);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/edit_profile.php?error=none');
+    header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=none');
     exit();
 }
 

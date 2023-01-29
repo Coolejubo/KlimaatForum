@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -37,7 +38,19 @@
 
     }
     ?>
-    <input class="searchBar" type="text" placeholder="Search..">
+    <form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/search.php" method="get">
+        <input class="searchBar" id="search" type="text" name="search" placeholder="Search..">
+        <!-- <input style="display:none;" type="submit" value="search"> -->
+    </form>
+    <!-- <script>
+        document.getElementById("search-form").addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("submit-button").click();
+            }
+        });
+    </script> -->
+
 </div>
 
 
