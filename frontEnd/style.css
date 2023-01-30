@@ -5,6 +5,26 @@ html {
     font-size: 20px;
 }
 
+#cookie-consent {
+    background-image: url('https://webtech-ki46.webtech-uva.nl/frontEnd/backgroundupscaled.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: auto;
+    z-index: 2;
+  }
+  
+  #cookie-consent-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 80%;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid #333;
+    box-shadow: 2px 2px 2px #ccc;
+    z-index: 3;
+  }
+  
 
 /* Dit is de styling voor de header die bovenaan elke
 pagina staat, het is belangrijk dat deze responsive is,
@@ -32,6 +52,7 @@ dus je moet werken met size: #vw ofzo. */
     align-items: center;
     font-size: 20px;
     flex-wrap: wrap;
+    z-index: 0;
 }
 
 /* Style the links inside the navigation bar */
@@ -43,6 +64,7 @@ dus je moet werken met size: #vw ofzo. */
     text-align: center;
     padding: 14px;
     text-decoration: none;
+    z-index: 0;
 }
 
 .topnav form {
@@ -126,3 +148,34 @@ dus je moet werken met size: #vw ofzo. */
     background-size: cover;
 } */
 
+.cookie-container {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: #2f3640;
+    color: #f5f6fa;
+    padding: 0 32px;
+    box-shadow: 0 -2px 16px rgba(47, 54, 64, 0.39);
+  
+    transition: 400ms;
+  }
+  
+  .cookie-container.active {
+    bottom: 0;
+  }
+  
+  .cookie-container a {
+    color: #f5f6fa;
+  }
+  
+  .cookie-btn {
+    background: #e84118;
+    border: 0;
+    color: #f5f6fa;
+    padding: 12px 48px;
+    font-size: 18px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }

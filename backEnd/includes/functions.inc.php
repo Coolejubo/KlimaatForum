@@ -19,6 +19,26 @@ function emptyInputsLogin($username, $psw) {
     return $result;
 }
 
+function invalidUsername($username) {
+
+    if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function invalidEmail($email) {
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function pswMatch($psw, $pswrepeat) {
 
     if ($psw == $pswrepeat) {
@@ -57,6 +77,32 @@ function userExists($connection, $username, $email) {
 
     // $rowprint = mysqli_fetch_assoc($resultData);
     // print($rowprint['email'].$rowprint['password']);
+
+    if ($row = mysqli_fetch_assoc($resultData)) {
+        return  $row;
+    }
+    else {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
+
+function otherUserExists($connection, $username, $email, $user_id) {
+    $query = 'SELECT * FROM users WHERE (username = ? OR email = ?) AND userID != ?;';
+    $stmt = mysqli_stmt_init($connection);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php?error=smtm2Failed');
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, 'sss', $username, $email, $user_id);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($resultData)) {
         return  $row;
@@ -156,16 +202,60 @@ function emptyInputsEdit($username, $email, $about) {
 
 
 function editUser($connection, $username, $email, $user_id) {
-    $query = 'UPDATE users SET username = ?, email = ? WHERE userID = ?;';
-    $stmt = mysqli_prepare($connection, $query);
-    mysqli_stmt_bind_param($stmt, 'ssi', $username, $email, $user_id);
-    mysqli_stmt_execute($stmt);
-    $_SESSION['username'] = $username;
-    $_SESSION['email'] = $email;
-    mysqli_stmt_close($stmt);
+       // Check if username exists in database, if so make it empty
+       $username_check_query = "SELECT username FROM users WHERE username='$username'";
+       $username_check_result = mysqli_query($connection, $username_check_query);
+       if (mysqli_num_rows($username_check_result) > 0) {
+           $username = "";
+       }
+   
+       // Check if email exists in database , if so make it empty
+       $email_check_query = "SELECT email FROM users WHERE email='$email'";
+       $email_check_result = mysqli_query($connection, $email_check_query);
+       if (mysqli_num_rows($email_check_result) > 0) {
+           $email = "";
+       }
+   
+       // Update values if they are not empty
+       if (!empty($username) and !empty($email)){
+            $query = 'UPDATE users SET username = ?, email = ? WHERE userID = ?;';
+            $stmt = mysqli_prepare($connection, $query);
+            mysqli_stmt_bind_param($stmt, 'ssi', $username, $email, $user_id);
+            mysqli_stmt_execute($stmt);
+            $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
+            mysqli_stmt_close($stmt);
+        
+            header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=none');
+            exit();
+       }
+       if (!empty($username)) {
+            $query = 'UPDATE users SET username = ? WHERE userID = ?;';
+            $stmt = mysqli_prepare($connection, $query);
+            mysqli_stmt_bind_param($stmt, 'si', $username, $user_id);
+            mysqli_stmt_execute($stmt);
+            $_SESSION['username'] = $username;
+            mysqli_stmt_close($stmt);
+        
+            header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=none');
+            exit();
+       }
+       if (!empty($email)) {
+            $query = 'UPDATE users SET email = ? WHERE userID = ?;';
+            $stmt = mysqli_prepare($connection, $query);
+            mysqli_stmt_bind_param($stmt, 'si', $email, $user_id);
+            mysqli_stmt_execute($stmt);
+            $_SESSION['email'] = $email;
+            mysqli_stmt_close($stmt);
+        
+            header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=none');
+            exit();
+       }
+       if (empty($email) and empty($username)) {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=Sameinput');
+        exit();
+   }
 
-    header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=none');
-    exit();
 }
 
 function like($referenceID, $userID, $post, $connection) {

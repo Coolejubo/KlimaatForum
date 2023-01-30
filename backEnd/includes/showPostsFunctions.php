@@ -24,6 +24,27 @@ function tenBestPosts($connection, $page) {
     return $result;
 }
 
+function userTenLatestPosts($connection, $userID, $page) {
+    if ($page > 0) {
+        $offset = ($page * 10);
+    } else {
+        $offset = 0;
+    }
+    $result = mysqli_query($connection, "SELECT * FROM posts WHERE userID = '$userID' ORDER BY postDate DESC LIMIT 10 OFFSET ".$offset.';');
+    $result = mysqli_fetch_all($result, MYSQLI_NUM);
+    return $result;
+}
+function userTenBestPosts($connection, $userID, $page) {
+    if ($page > 0) {
+        $offset = ($page * 10);
+    } else {
+        $offset = 0;
+    }
+    $result = mysqli_query($connection, "SELECT * FROM posts WHERE userID = '$userID' ORDER BY postLikes DESC LIMIT 10 OFFSET ".$offset. ";");
+    $result = mysqli_fetch_all($result, MYSQLI_NUM);
+    return $result;
+}
+
 //DEBUG
 
 // require_once 'connection.php';
@@ -61,10 +82,26 @@ function showPosts($post, $connection) {
                 <div class="message-meta">
                     <span class="username"><?php echo fetchUsername($post[$x][0], $connection) ?></span>
                     <span class="date"><?php echo date("d-m-Y H:i", $post[$x][4]) ?></span>
-                    <img class="profilePic" src="https://api.multiavatar.com/<?php echo fetchUsername($post[$x][0], $connection) ?>.png?apikey=FgC5ls0LaUYoKd">
+                    <a href="https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/userProfile.php?userID=<?php echo $post[$x][0] ?>">
+                        <img class="profilePic" src="https://api.multiavatar.com/<?php echo fetchUsername($post[$x][0], $connection) ?>.png?apikey=FgC5ls0LaUYoKd">
+                    </a>
                 </div>
             </div>
-            <div class="message-content"><?php echo $post[$x][3] ?></div>
+            <div class="message-content">
+                <?php 
+                    if (strlen($post[$x][3]) > 1000) {
+                        for ($i = 0; $i < 1000; $i++) {
+                            echo $post[$x][3][$i];
+                        }
+                        ?>
+                        <p style="color: darkgray;">Click on comments to read more</p>
+                        <?php
+                    }
+                    else { 
+                    $post[$x][3];
+                    }
+                ?>
+            </div>
             <div class="message-footer">
                 <div class="message-likes">
                     <?php
@@ -141,3 +178,56 @@ function hasLiked($postID, $userID, $connection, $isPost) {
 //     print('BRUH');
 // }
 
+function getPostCount($connection) {
+    $query = "SELECT COUNT(postId) as count FROM posts";
+    $result = mysqli_query($connection, $query);
+    $count = mysqli_fetch_assoc($result)['count'];
+    return $count;
+}
+
+
+function showUserPosts($post, $connection) {
+
+    $lim = count($post);
+    
+    //maak een for loop die door alrle post heen loopt en ze 
+    // een voor een echod naar de html code.
+    for ($x = 0; $x <= ($lim - 1); $x++) {
+        ?>
+        <div class="message-container">
+            <div class="message-header">
+                <h1 class="message-title"><?php echo $post[$x][2] ?></h1>
+                <div class="message-meta">
+                    <span class="username"><?php echo fetchUsername($post[$x][0], $connection) ?></span>
+                    <span class="date"><?php echo date("d-m-Y H:i", $post[$x][4]) ?></span>
+                    <img class="profilePic" src="https://api.multiavatar.com/<?php echo fetchUsername($post[$x][0], $connection) ?>.png?apikey=FgC5ls0LaUYoKd">
+                </div>
+    </div>
+            <div class="message-content"><?php echo $post[$x][3] ?></div>
+            <div class="message-footer">
+                <div class="delete-btn">
+                    <form action='delete.php' method="post">
+                        <input type="hidden" name="postID" value="<?php echo $post[$x][1] ?>">
+                        <input type="submit" name="submit" value="Delete">
+                    </form>
+                </div>
+                <div class="message-likes">
+                    <span class="like-count">
+                        <?php 
+                            echo $post[$x][5];
+                            if ($post[$x][5] == 1) {
+                                echo ' Like';
+                            }
+                            else {
+                                echo ' Likes';
+                            }
+                        ?> 
+                    </span>
+                </div>
+                <a class="message-comments" href="https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.php?id=<?php echo $post[$x][1] ?>" class="comments-btn">comments</a>
+            </div>
+        </div>
+        <?php
+    }
+
+}
