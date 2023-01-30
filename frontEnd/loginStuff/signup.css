@@ -1,6 +1,8 @@
-.loginDiv {
-	width: 600px;
-	margin: 0 auto;
+/* Styling voor de signup pagina */
+
+.signupBox {
+    width: 600px;
+    margin: 0 auto;
 }
 h1 {
     padding: 14px;
@@ -8,7 +10,7 @@ h1 {
 
 p{
     color: red;
-	padding-left: 20px;
+    padding-left: 20px;
 }
 
 form input{

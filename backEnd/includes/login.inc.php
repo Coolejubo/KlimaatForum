@@ -12,7 +12,18 @@ if (isset($_POST['submit'])) {
         header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/login.php?error=emptyInput');
         exit();
     }
-    
+    if (invalidEmail($username)) {
+        if(invalidUsername($username)){
+            header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/login.php?error=invalidUser');
+            exit();
+        }
+    }
+    if (invalidUsername($username)) {
+        if(invalidEmail($username)){
+            header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/login.php?error=invalidUser');
+            exit();
+        }
+    }
     loginUser($connection, $username, $psw);
     
 } 
