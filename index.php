@@ -1,6 +1,7 @@
 <?php
 
     include_once 'frontEnd/header.php';
+    $pageInfo = '&webPage=index';
 
 ?>
 <!-- include styling for this page. -->
@@ -93,18 +94,23 @@ if (isset($_GET['displayLatest'])) {
         $page = $_GET['page'];
         if ($displayLatest) {
             $array = tenLatestPosts($connection, $page);
+            $pageInfo = $pageInfo.'&page='.$page.'&'.'displayLatest=true';
+
         } else {
             $array = tenBestPosts($connection, $page);
+            $pageInfo = $pageInfo.'&page='.$page.'displayLatest=false';
         }
     }
     else {
         if ($displayLatest) {
             $array = tenLatestPosts($connection, 0);
+            $pageInfo = $pageInfo.'&displayLatest=true';
         } else {
             $array = tenBestPosts($connection, 0);
+            $pageInfo = $pageInfo.'&displayLatest=false';
         }
     }
-    showPosts($array, $connection);
+    showPosts($array, $connection, $pageInfo);
     ?>
 </div>
 
