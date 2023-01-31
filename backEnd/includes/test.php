@@ -10,3 +10,4 @@ postLikes DESC;";
 $result = $connection->query($query);
 $result = mysqli_fetch_all($result, MYSQLI_NUM);
 print $result[0][3];
+?>
