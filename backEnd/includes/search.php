@@ -6,6 +6,9 @@ include_once 'functions.inc.php';
 
 $search = $_GET['search'];
 
+$pageInfo = '&webPage=search&search='.$search;
+
+
 if (empty($search)) {
     header("Location: https://webtech-ki46.webtech-uva.nl/index.php");
     exit;
@@ -41,7 +44,7 @@ else {
     if(count($result) == 0){
         echo "No threads found";
     } else {
-        showPosts($result, $connection);
+        showPosts($result, $connection, $pageInfo);
     }
     ?>
 </div>

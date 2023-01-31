@@ -11,6 +11,16 @@
         echo '&userID='.$user_id;
     }
 
+    $pageInfo = '&webPage=userProfile&profileID='.$_GET['userID'];
+
+    if (isset($_GET['displayLatest'])) {
+        $pageInfo = $pageInfo.'&displayLatest='.$_GET['displayLatest'];
+    }
+    if (isset($_GET['page'])) {
+        $pageInfo = $pageInfo.'&page='.$_GET['page'];
+    }
+
+
 ?>
 
 <head>
@@ -112,7 +122,7 @@
             $array = userTenBestPosts($connection, $user_id, 0);
         }
     }
-    showPosts($array, $connection);
+    showPosts($array, $connection, $pageInfo);
     ?>
 </div>
 
