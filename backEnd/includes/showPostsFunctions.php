@@ -98,7 +98,7 @@ function showPosts($post, $connection) {
                         <?php
                     }
                     else { 
-                    $post[$x][3];
+                        echo $post[$x][3];
                     }
                 ?>
             </div>

@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     mysqli_stmt_bind_param($stmt, 's', $postID);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=none');
+    header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=deletesucces');
     exit();
 }
 ?>

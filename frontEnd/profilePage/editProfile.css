@@ -88,6 +88,14 @@ img {
   cursor: pointer;
 }
 
+.errorMessage{
+  width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
 
 
 

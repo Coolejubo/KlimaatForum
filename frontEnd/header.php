@@ -22,11 +22,9 @@
 </head>
 
 <div id="cookie-consent">
-    <a img src='https://webtech-ki46.webtech-uva.nl/frontEnd/backgroundupscaled.jpg';></a>
     <div id="cookie-consent-content">
         <p>"When you visit our website, we store small text files called cookies on your device. 
-            These cookies help us remember your preferences and activities on our website, 
-            such as your language or items in your shopping cart. 
+            These cookies help us remember your preferences and activities on our website.
             This way, we can provide you with a more personalized experience when you visit our website again.
             Please note that some of these cookies may be temporary and will be deleted when you close your browser,
             while others may be permanent and will stay on your device until they expire or you delete them manually. 
@@ -34,20 +32,18 @@
             We value your privacy and we want to be transparent about our use of cookies.
             By using our website, you consent to our use of cookies as described above."</p>
         <button id="cookie-consent-agree">Agree</button>
-    </div>
+</div>
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
     if (!localStorage.getItem("cookie-consent")) {
       document.getElementById("cookie-consent").style.display = "block";
-      document.getElementById("cookie-consent-content").style.display = "block";
     }
   });
   
   document.getElementById("cookie-consent-agree").addEventListener("click", function() {
     localStorage.setItem("cookie-consent", "true");
     document.getElementById("cookie-consent").style.display = "none";
-    document.getElementById("cookie-consent-content").style.display = "none";
   });
 </script>
 <body>
@@ -70,7 +66,7 @@
     }
     ?>
     <form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/search.php" method="get">
-        <input class="searchBar" id="search" type="text" name="search" placeholder="Search..">
+        <input class="searchBar" type="text" name="search" placeholder="Search..">
         <!-- <input style="display:none;" type="submit" value="search"> -->
     </form>
     <!-- <script>
