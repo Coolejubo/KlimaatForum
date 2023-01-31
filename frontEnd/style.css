@@ -6,15 +6,17 @@ html {
 }
 
 #cookie-consent {
-    background-image: url('https://webtech-ki46.webtech-uva.nl/frontEnd/backgroundupscaled.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    width: auto;
-    z-index: 2;
+    display: none;
+    background-color: darkgreen;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 3;
   }
-  
-  #cookie-consent-content {
+#cookie-consent-content {
     background-color: rgba(255, 255, 255, 0.8);
     width: 80%;
     margin: 0 auto;
@@ -22,7 +24,6 @@ html {
     text-align: center;
     border: 1px solid #333;
     box-shadow: 2px 2px 2px #ccc;
-    z-index: 3;
   }
   
 
@@ -67,7 +68,7 @@ dus je moet werken met size: #vw ofzo. */
     z-index: 0;
 }
 
-.topnav form {
+/* .topnav form {
     float: left;
     display: block;
     color: white;
@@ -75,7 +76,7 @@ dus je moet werken met size: #vw ofzo. */
     text-align: left;
     text-decoration: none;
     width: auto;
-}
+} */
   
 /* Change the color of links on hover */
 .topnav a:hover {

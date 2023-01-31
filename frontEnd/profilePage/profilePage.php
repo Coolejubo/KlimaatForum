@@ -33,6 +33,26 @@
 <div class="editButtonDiv">
     <button class="edit-button">Edit</button>
 </div>
+
+<div class="errorMessage">
+    <?php
+    if (isset($_GET["error"])) {
+        if ($_GET["error"] == "emptyInput") {
+            echo "<p>Please fill in all fields!<?p>";
+        }
+        else if ($_GET["error"] == "usernameExists") {
+            echo "<p>This username or email has already been used.</p>";
+        }
+        else if ($_GET["error"] == "smtmFailed") {
+            echo "<p>Something went wrong with the SQL statement when adding a user.</p>";
+        }
+        else if ($_GET["error"] == "none") {
+            echo "<p>Saved succesfully!<?p>";
+        }
+    }
+    ?>
+</div>
+
 <?php
 $displayLatest = true;
 if (isset($_GET['displayLatest'])) {
@@ -123,22 +143,5 @@ if (isset($_GET['displayLatest'])) {
 </div>
 
 <?php
-
-
-if (isset($_GET["error"])) {
-	if ($_GET["error"] == "emptyInput") {
-		echo "<p>Please fill in all fields!<?p>";
-	}
-	else if ($_GET["error"] == "usernameExists") {
-		echo "<p>This username or email has already been used.</p>";
-	}
-    else if ($_GET["error"] == "smtmFailed") {
-		echo "<p>Something went wrong with the SQL statement when adding a user.</p>";
-	}
-	else if ($_GET["error"] == "none") {
-		echo "<p>Saved succesfully!<?p>";
-	}
-}
-
     include_once '../footer.php';
 ?>

@@ -317,3 +317,5 @@ function displayComments($comments, $postID) {
 // require_once 'connection.php';
 
 // unlike(11, 27, 1, $connection);
+
+?>

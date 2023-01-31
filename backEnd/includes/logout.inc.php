@@ -5,3 +5,5 @@
     session_destroy();
 
     header('location:  https://webtech-ki46.webtech-uva.nl');
+
+?>

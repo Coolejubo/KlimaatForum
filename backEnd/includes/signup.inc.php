@@ -69,3 +69,5 @@ if (isset($_POST['submit'])) {
 else {
     header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php');
 }
+
+?>

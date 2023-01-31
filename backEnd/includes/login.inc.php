@@ -31,3 +31,5 @@ else {
     header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/login.php');
     exit();
 }
+
+?>
