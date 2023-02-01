@@ -4,92 +4,147 @@
 
 ?>
 
-<style>
-    /* General styles */
-    body {
-        background-color: #E5F9E0;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        color: #333;
-    }
-    h2 {
-        font-size: 24px;
-        text-align: center;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-    /* Profile Box styles */
-    .ProfileBox {
-        display: flex;
-        align-items: center;
-        width: 80%;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px #ccc;
-    }
-    .profile-picture {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        margin-right: 20px;
-    }
-    /* Table styles */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border: 1px solid #ccc;
-    }
-    /* Table header styles */
-    th {
-    background-color: #f2f2f2;
-    font-size: 18px;
-    font-weight: bold;
-    }
-    /* Table data styles */
-    td {
-        font-size: 16px;
-    }
-    /* Highlight the table row on hover */
-    tr:hover {
-        background-color: #f5f5f5;
-    }
-    /* Edit button styles */
-    .edit-btn {
-        background-color: #4CAF50;
-        color: #fff;
-        padding: 8px 12px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-    }
-</style>
+<head>
+    <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/editProfile.css">
+    <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/homePage/home.css">
+    <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.css">
+    <script src="editProfile.js"></script>
+</head>
 
-<div class="ProfileBox">
-    <img src="<?php echo $_SESSION['profile_picture']; ?>" class="profile-picture">
-    <table style="width:100%">
-        <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>About</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td><?php echo $_SESSION['username']; ?></td>
-            <td><?php echo $_SESSION['email']; ?></td>
-            <td><?php echo $_SESSION['about']; ?></td>
-            <td>
-            <a href="/frontEnd/profilePage/edit_profile.php" class="edit-btn">Edit</a>
-            </td>
-        </tr>
-    </table>
+<div class="user-info">
+    <img class="profile_Pic" src="https://api.multiavatar.com/<?php echo $_SESSION['username'] ?>.png?apikey=FgC5ls0LaUYoKd">        
+    <form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/editProfile.inc.php" method="post">
+        <div class="user-details">
+            <h1>Username</h1>
+            <p class="user_name"><?php echo $_SESSION['username'] ?></p>
+            <h2>Email</h1>
+            <p class="email"><?php echo $_SESSION['email'] ?></p>
+        </div>
+        <div class="edit-form" style="display: none;">
+            <h1>Username</h1>
+            <input type="text" class="usernameInput" name="username" placeholder="<?php echo $_SESSION['username'] ?>">
+            <h1>Email</h1>
+            <input type="text" class="emailEdit" name="email" placeholder="<?php echo $_SESSION['email'] ?>">
+            <button type="submit" name="submit">Save</button>
+        </div>
+    </form>
 </div>
 
-<?php 
+<div class="editButtonDiv">
+    <button class="edit-button">Edit</button>
+</div>
+
+<div class="errorMessage">
+    <?php
+    if (isset($_GET["error"])) {
+        if ($_GET["error"] == "emptyInput") {
+            echo "<p>Please fill in all fields!<?p>";
+        }
+        else if ($_GET["error"] == "usernameExists") {
+            echo "<p>This username or email has already been used.</p>";
+        }
+        else if ($_GET["error"] == "invalidInput") {
+            echo "<p>This username or email contains characters that are not allowed.</p>";
+        }
+        else if ($_GET["error"] == "smtmFailed") {
+            echo "<p>Something went wrong with the SQL statement when adding a user.</p>";
+        }
+        else if ($_GET["error"] == "none") {
+            echo "<p>Saved succesfully!<?p>";
+        }
+    }
+    ?>
+</div>
+
+<?php
+    $displayLatest = true;
+    if (isset($_GET['displayLatest'])) {
+        $displayLatest = $_GET['displayLatest'] === 'true';
+        }
+?>
+
+<div class="pageFilters">
+    <div class="pageBar">
+        <a href="https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?
+            <?php 
+            if (isset($_GET['page'])) {
+                $page = $_GET['page'];
+                if ($page <= 0){
+                    echo 'page=0';
+                } 
+                else {
+                echo 'page='.($page - 1);
+                }
+            } 
+            else {
+                echo 'page=0';
+            }
+            echo '&displayLatest=' . ($displayLatest ? 'true' : 'false');
+            ?>
+        " class="previous round">&#8249;</a>
+
+        <?php
+        require_once '/var/www/html/backEnd/includes/showPostsFunctions.php';
+        require_once '/var/www/html/backEnd/includes/connection.php';
+        $postCount = getPostCount($connection);
+        if (!isset($_GET['page']) || $_GET['page'] + 1 < ceil($postCount / 10)) {
+        ?>
+            <a href="https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?
+            <?php
+                if (isset($_GET['page'])) {
+                        $page = $_GET['page'];
+                        echo 'page='.($page + 1);
+                    } 
+                else {
+                        echo 'page=1';
+                    }
+                echo "&displayLatest=".($displayLatest ? 'true' : 'false');
+            ?>
+            " class="next round">&#8250;</a>
+        <?php
+        }
+        ?>
+
+    </div>
+    <div class="postTypeDiv">   
+        <form action="#">
+        <select class="postType" onchange="window.location = 'https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?displayLatest=' + (this.value === 'latest') + '&page=' + <?php echo isset($_GET['page']) ? $_GET['page'] : '0'; ?>">
+            <option value="best" <?php echo isset($_GET['displayLatest']) && $_GET['displayLatest'] === 'false' ? 'selected' : ''; ?>>Best Posts</option>
+            <option value="latest" <?php echo !isset($_GET['displayLatest']) || $_GET['displayLatest'] === 'true' ? 'selected' : ''; ?>>Latest Posts</option>
+        </select>
+        </form>
+    </div>
+</div>
+
+<div class="messages">
+    <?php 
+    require_once '/var/www/html/backEnd/includes/showPostsFunctions.php';
+    require_once '/var/www/html/backEnd/includes/connection.php';
+    $id = $_SESSION['userID'];
+
+    if (isset($_GET['displayLatest'])) {
+        $displayLatest = $_GET['displayLatest'] === 'true';
+    }
+
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+        if ($displayLatest) {
+            $array = userTenLatestPosts($connection, $id, $page);
+        } else {
+            $array = userTenBestPosts($connection, $id, $page);
+        }
+    }
+    else {
+        if ($displayLatest) {
+            $array = userTenLatestPosts($connection,$id, 0);
+        } else {
+            $array = userTenBestPosts($connection, $id, 0);
+        }
+    }
+    showUserPosts($array, $connection);
+    ?>
+</div>
+
+<?php
     include_once '../footer.php';
 ?>

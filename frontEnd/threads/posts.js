@@ -1,8 +1,5 @@
-let replyButtons = document.querySelectorAll('.reply-button');
-let replyForms = document.querySelectorAll('.reply-form');
-
-replyButtons.forEach(function(button, index) {
-    button.addEventListener('click', function() {
-        replyForms[index].classList.toggle('hide');
+document.querySelectorAll(".reply-button").forEach(function(button){
+    button.addEventListener("click", function(){
+        this.nextElementSibling.style.display = "block";
     });
 });
