@@ -18,10 +18,20 @@
             <button type="submit" class="postButton" name="submit">Post</button>
     </form>
         
+    <?php
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "emptyInput") {
+                echo "<p>Fill in all fields!<?p>";
+            }
+        }
+    ?>
+    
 </div>
 
 
 <?php 
+
+    
 
     include_once '../footer.php'
 
