@@ -214,20 +214,28 @@ function emptyInputsEdit($username, $email, $about) {
 
 
 function editUser($connection, $username, $email, $user_id) {
-       // Controleer of de gebruikersnaam in de database bestaat, zo ja, maak deze dan leeg
-       $username_check_query = "SELECT username FROM users WHERE username='$username'";
-       $username_check_result = mysqli_query($connection, $username_check_query);
-       if (mysqli_num_rows($username_check_result) > 0) {
-           $username = "";
-       }
-   
-       // Controleer of de email in de database bestaat, zo ja, maak deze dan leeg
-       $email_check_query = "SELECT email FROM users WHERE email='$email'";
-       $email_check_result = mysqli_query($connection, $email_check_query);
-       if (mysqli_num_rows($email_check_result) > 0) {
-           $email = "";
-       }
-   
+      // Check if the username exists in the database, if so, make it empty
+        $username = mysqli_real_escape_string($connection, $username);
+        $username_check_stmt = $connection->prepare("SELECT username FROM users WHERE username=?");
+        $username_check_stmt->bind_param("s", $username);
+        $username_check_stmt->execute();
+        $username_check_result = $username_check_stmt->get_result();
+        if (mysqli_num_rows($username_check_result) > 0) {
+            $username = "";
+        }
+        $username_check_stmt->close();
+
+        // Check if the email exists in the database, if so, make it empty
+        $email = mysqli_real_escape_string($connection, $email);
+        $email_check_stmt = $connection->prepare("SELECT email FROM users WHERE email=?");
+        $email_check_stmt->bind_param("s", $email);
+        $email_check_stmt->execute();
+        $email_check_result = $email_check_stmt->get_result();
+        if (mysqli_num_rows($email_check_result) > 0) {
+            $email = "";
+        }
+        $email_check_stmt->close();
+        
        // Check of beide inputvelden niet leeg zijn
         // Als dit zo is, update dan username en email in de database en sla deze op in de session (met SQL preparatie)
        if (!empty($username) and !empty($email)){

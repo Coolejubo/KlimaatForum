@@ -43,6 +43,9 @@
         else if ($_GET["error"] == "usernameExists") {
             echo "<p>This username or email has already been used.</p>";
         }
+        else if ($_GET["error"] == "invalidInput") {
+            echo "<p>This username or email contains characters that are not allowed.</p>";
+        }
         else if ($_GET["error"] == "smtmFailed") {
             echo "<p>Something went wrong with the SQL statement when adding a user.</p>";
         }
@@ -54,10 +57,10 @@
 </div>
 
 <?php
-$displayLatest = true;
-if (isset($_GET['displayLatest'])) {
-    $displayLatest = $_GET['displayLatest'] === 'true';
-    }
+    $displayLatest = true;
+    if (isset($_GET['displayLatest'])) {
+        $displayLatest = $_GET['displayLatest'] === 'true';
+        }
 ?>
 
 <div class="pageFilters">

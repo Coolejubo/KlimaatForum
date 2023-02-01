@@ -15,16 +15,17 @@ if (isset($_POST['submit'])) {
         header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=emptyInput');
         exit();
     }
-    #if (userExists($connection, $username, $email) !== false ) {
-        #header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=usernameExists');
-        #exit();
-    #}
     if (OtherUserExists($connection, $username, $email, $user_id) !== false ) {
         header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=usernameExists');
         exit();
     }
-
-    editUser($connection, $username, $email, $user_id);
+    if (!invalidEmail($email) and !invalidUsername($username)) {
+        editUser($connection, $username, $email, $user_id);
+    }
+    else {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/profilePage.php?error=invalidInput');
+        exit();
+    }
 }
 else {
     header('location: https://webtech-ki46.webtech-uva.nl');
