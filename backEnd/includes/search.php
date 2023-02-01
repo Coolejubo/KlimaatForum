@@ -17,13 +17,20 @@ if (empty($search)) {
 if (invalidUsername($search)) {
     $result = [];
 }
+// Dit is de query voor de search, er de titel wordt eerst gematched
+// op de search en daarna de content.
 else {
-    $search = $connection->real_escape_string($_GET['search']);
-    $result = $connection->query("SELECT * FROM posts 
-        WHERE postTitle LIKE '%$search%' OR postContent LIKE '%$search%' 
-        ORDER BY CASE WHEN postTitle LIKE '%$search%' THEN 1 ELSE 2 END, 
-        postLikes DESC");
+    $search = $_GET['search'];
+    $stmt = $connection->prepare("SELECT *, 
+        IF(postTitle LIKE ?, 1, 2) AS titleMatch 
+        FROM posts 
+        WHERE postTitle LIKE '%".$search."%' OR postContent LIKE '%".$search."%' 
+        ORDER BY titleMatch, postLikes DESC");
+    $stmt->bind_param("s", $search);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $result = mysqli_fetch_all($result, MYSQLI_NUM);
+    $stmt->close();
 }
 
 ?>
@@ -50,7 +57,6 @@ else {
 </div>
 
 <?php
-
 
 $connection->close();
 include_once '../../frontEnd/footer.php';

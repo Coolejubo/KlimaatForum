@@ -13,15 +13,19 @@ if (!isset($_SESSION["userID"])) {
 
 
     // verdeelt alle eigenschappen van een comment over de juiste variablen en sanitized de comments
-    $responseContent = htmlspecialchars($_POST['responseContent']);
-    $postID = htmlspecialchars($_POST['postID']);
-    $userID = $_SESSION["userID"];
-    $parentID = htmlspecialchars($_POST['parentID']);
+    $responseContent = mysqli_real_escape_string($connection, $_POST['responseContent']);
+    $postID = mysqli_real_escape_string($connection, $_POST['postID']);
+    $userID = mysqli_real_escape_string($connection, $_SESSION['userID']);
+    $parentID = mysqli_real_escape_string($connection, $_POST['parentID']);
 
-    // voegt de comment toe aan de database
-    $connection->query("INSERT INTO responses (responseContent, postID, userID, parentID) VALUES ('$responseContent', '$postID', '$userID', '$parentID')");
+    //bind parameters en insert data
+    $stmt = $connection->prepare("INSERT INTO responses (responseContent, postID, userID, parentID) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("siii", $responseContent, $postID, $userID, $parentID);
+    $stmt->execute();
+    $stmt->close();
 
     $connection->close();
+
 
     header("Location: https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.php?id=" . $postID);
     exit();
