@@ -12,7 +12,7 @@
 		<h1>Log in</h1>
 		<input type='text' name="username" placeholder="username/email">
 		<input type='password' name="password" placeholder="password">
-		<button type="submit" name="submit">Sign Up </button>
+		<button type="submit" name="submit">Log in </button>
 		<?php
 			if (isset($_GET["error"])) {
 				if ($_GET["error"] == "emptyInput") {
