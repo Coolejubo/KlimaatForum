@@ -5,11 +5,10 @@
 if (isset($_POST['submit'])) {
 
     // Maak schoon en bewaar de invoer van het formulier
-    $username = htmlspecialchars($_POST['username']);
-    $email = htmlspecialchars($_POST['email']);
-    $about = htmlspecialchars($_POST['about']);
-    $psw = htmlspecialchars($_POST['password']);
-    $pswrepeat = htmlspecialchars($_POST['psw-repeat']);
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $psw = $_POST['password'];
+    $pswrepeat = $_POST['psw-repeat'];
     
     //Voeg de connection and functions bestanden toe
     require_once 'connection.php';
@@ -41,7 +40,7 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-    createUser($connection, $username, $email, $about, $psw);
+    createUser($connection, $username, $email, $psw);
 }
 else {
     header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php');
