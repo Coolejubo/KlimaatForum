@@ -52,13 +52,20 @@ $query->close();
 
         <?php 
         include_once '../../backEnd/includes/commentchains.php';
+
+        //functie om de content te filteren
+        function nl2br2($string) { 
+            $string = str_replace(array('\r\n', '\r', '\n'), '<br />', $string); 
+            return $string; 
+        } 
+
         // functie om de commentchains te displayen en elke comment een reply form te geven
         function displayComments($reply_chains, $postID) {
             foreach ($reply_chains as $comment) {
                 echo '<div class="parent-comment">';
                 echo '<p class="responseDate">' . $comment['responseDate'] . '</p>';
                 echo '<p class="responseUser"> ' . $comment['username'] . '</p>';
-                echo '<p class="responseContent">' . $comment['responseContent'] . '</p>';
+                echo '<p class="responseContent">' . nl2br2($comment['responseContent']) . '</p>';
                 echo '<button class="reply-button">Reply</button>';
                 echo '<form style="display:none;" class="replyForm" action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/createComment.inc.php" method="post">';
                 echo '<br>';
