@@ -106,7 +106,7 @@ if (isset($_GET['displayLatest'])) {
         if ($displayLatest) {
             $array = tenLatestPosts($connection, 0);
             $pageInfo = $pageInfo.'&displayLatest=true';
-        } else {
+        } else { 
             $array = tenBestPosts($connection, 0);
             $pageInfo = $pageInfo.'&displayLatest=false';
         }
@@ -115,34 +115,6 @@ if (isset($_GET['displayLatest'])) {
     ?>
 </div>
 
-<script>
-    // Het formulier submit-event
-    const form = document.getElementById('form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const postID = document.getElementById('postID').value;
-        const likeValue = document.getElementById('likeValue').value;
-        const likeCountSpan = document.querySelector('.like-count');
-        let likeCount = parseInt(likeCountSpan.innerHTML.split(" ")[0]);
-
-        if (isNaN(likeCount)) {
-            likeCount = 1;
-        }
-        // Verander de like/unlike-waarde en het aantal likes lokaal
-        if (likeValue === 'like') {
-            document.getElementById('likeValue').value = 'unlike';
-            document.getElementById('like-btn').classList.add('hidden');
-            document.getElementById('unlike-btn').classList.remove('hidden');
-            likeCountSpan.innerHTML = (likeCount + 1) + ' Likes';
-        } else {
-            document.getElementById('likeValue').value = 'like';
-            document.getElementById('like-btn').classList.remove('hidden');
-            document.getElementById('unlike-btn').classList.add('hidden');
-            likeCountSpan.innerHTML = (likeCount - 1) + ' Likes';
-        }
-    });
-</script>
 <?php 
 
     include_once 'frontEnd/footer.php'
