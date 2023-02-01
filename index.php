@@ -1,15 +1,16 @@
 <?php
-
+    //Include de header
     include_once 'frontEnd/header.php';
     $pageInfo = '&webPage=index';
 
 ?>
-<!-- include styling for this page. -->
 
 <head>
+    <!--Include de stylesheets voor homepagina-->
     <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/homePage/home.css">
     <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.css">
 </head>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
     if (!localStorage.getItem("cookie-consent")) {
@@ -114,6 +115,34 @@ if (isset($_GET['displayLatest'])) {
     ?>
 </div>
 
+<script>
+    // Het formulier submit-event
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const postID = document.getElementById('postID').value;
+        const likeValue = document.getElementById('likeValue').value;
+        const likeCountSpan = document.querySelector('.like-count');
+        let likeCount = parseInt(likeCountSpan.innerHTML.split(" ")[0]);
+
+        if (isNaN(likeCount)) {
+            likeCount = 1;
+        }
+        // Verander de like/unlike-waarde en het aantal likes lokaal
+        if (likeValue === 'like') {
+            document.getElementById('likeValue').value = 'unlike';
+            document.getElementById('like-btn').classList.add('hidden');
+            document.getElementById('unlike-btn').classList.remove('hidden');
+            likeCountSpan.innerHTML = (likeCount + 1) + ' Likes';
+        } else {
+            document.getElementById('likeValue').value = 'like';
+            document.getElementById('like-btn').classList.remove('hidden');
+            document.getElementById('unlike-btn').classList.add('hidden');
+            likeCountSpan.innerHTML = (likeCount - 1) + ' Likes';
+        }
+    });
+</script>
 <?php 
 
     include_once 'frontEnd/footer.php'

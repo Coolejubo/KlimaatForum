@@ -126,24 +126,22 @@ function showPosts($post, $connection, $pageinfo) {
                     // Als de gebruiker ingelogd is, laat dan een like-formulier zien waarin de gebruiker de post kan liken of unliken
                     if (isset($_SESSION['userID'])) {
                         ?>
-                            <form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/like.inc.php?
-                                <?php echo $pageinfo; ?>
-                                " method="post" class="like-form">
-                                <input type="hidden" name="postID" value="<?php echo $post[$x][1]?>">
+                            <form id='form' action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/like.inc.php" method="post" class="like-form">
+                                <input type="hidden" id='postID' name="postID" value="<?php echo $post[$x][1]?>">
                                 <?php 
                                 if (hasLiked($post[$x][1], $_SESSION['userID'], $connection, 1)) {
                                 ?>
-                                <input type="hidden" name="likeValue" value="unlike">
-                                <button type="submit" name="submit" class="unlike-btn"></button>
+                                <input type="hidden" id='likeValue' name="likeValue" value="unlike">
+                                <button type="submit" id='unlike-btn' name="submit" class="unlike-btn"></button>
                                 <?php
                                 } 
                                 else {
                                 ?>
-                                <input type="hidden" name="likeValue" value="like">
-                                <button type="submit" name="submit" class="like-btn"></button>
-                                <?php
-                                }
-                                ?>
+                                <input type="hidden" id='likeValue' name="likeValue" value="like">
+                                <button type="submit" id='like-btn' name="submit" class="like-btn"></button>
+                            <?php
+                            }
+                            ?>
                             </form>
                     <?php 
                     }
