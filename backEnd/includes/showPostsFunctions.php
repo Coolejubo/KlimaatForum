@@ -142,7 +142,8 @@ function showPosts($post, $connection, $pageinfo) {
                             <?php
                             }
                             ?>
-                                <span class="like-count" id="likes-<?php echo $post[$x][1]; ?>">
+                            </form>
+                            <span class="like-count" id="likes-<?php echo $post[$x][1]; ?>">
                                     <?php 
                                     // Laat zien hoeveel likes de post heeft en of het "like" of "likes" is
                                         echo $post[$x][5];
@@ -153,13 +154,10 @@ function showPosts($post, $connection, $pageinfo) {
                                             echo ' Likes';
                                         }
                                     ?> 
-                                </span>
-                            </form>
-
+                            </span>
                     <?php 
                     }
                     ?> 
-
                 </div>
                 <!--Laat een knop zien voor "comments" die de gebruiker naar de comment pagina stuurt-->
                 <a class="message-comments" href="https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.php?id=<?php echo $post[$x][1] ?>" class="comments-btn">comments</a>
