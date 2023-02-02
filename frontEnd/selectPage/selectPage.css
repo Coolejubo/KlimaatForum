@@ -1,0 +1,29 @@
+.selectPage {
+    width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .selectPage {
+        width: auto;
+        margin: auto;
+    }    
+}
+
+.topicsGrid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+
+.gridElem {
+    background-color: darkgreen;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none;
+}

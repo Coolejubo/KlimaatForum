@@ -2,6 +2,11 @@
 
 Dit is de css voor de volgende en vorige pagina knoppen */
 
+.topicDiv {
+  width: 900px;
+  margin: 0 auto;
+}
+
 .pageFilters {
   display: flex;
   width: 900px;
@@ -85,9 +90,15 @@ Dit is de css voor de volgende en vorige pagina knoppen */
   font-size: 0.8em;
 }
 
+.topic {
+  color: darkgreen;
+  opacity: 50%;
+}
+
 .username {
   font-weight: bold;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .profilePic {

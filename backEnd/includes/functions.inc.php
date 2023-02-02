@@ -152,11 +152,11 @@ function createUser($connection, $username, $email, $psw) {
     exit();
 }
 
-function createPost($connection, $title, $content, $userID) {
+function createPost($connection, $topic, $title, $content, $userID) {
     //Haal UNIX tijd op (aantal seconden sinds 1970)
     $time = time();
     //Voorbereid de query
-    $query = 'INSERT INTO posts (userID, postTitle, postContent, postDate) VALUES (?, ?, ?, ?);';
+    $query = 'INSERT INTO posts (userID, postTitle, postContent, postDate, postTopic) VALUES (?, ?, ?, ?, ?);';
     $stmt = mysqli_prepare($connection, $query);
 
     //Controleer of het voorbereiden van de statement niet mislukt
@@ -166,10 +166,10 @@ function createPost($connection, $title, $content, $userID) {
     }
 
     //Voer de query uit
-    mysqli_stmt_bind_param($stmt,"issi", $userID, $title, $content, $time);
+    mysqli_stmt_bind_param($stmt,"issis", $userID, $title, $content, $time, $topic);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header('location: https://webtech-ki46.webtech-uva.nl?error=none');
+    header('location: https://webtech-ki46.webtech-uva.nl?error=none&topic='.$topic);
     exit();
 }
 

@@ -67,17 +67,8 @@
     ?>
     <form action="https://webtech-ki46.webtech-uva.nl/backEnd/includes/search.php" method="get">
         <input class="searchBar" type="text" name="search" placeholder="Search..">
-        <!-- <input style="display:none;" type="submit" value="search"> -->
     </form>
-    <!-- <script>
-        document.getElementById("search-form").addEventListener("keyup", function(event) {
-            event.preventDefault();
-            if (event.keyCode === 13) {
-                document.getElementById("submit-button").click();
-            }
-        });
-    </script> -->
-
 </div>
+
 
 

@@ -51,7 +51,7 @@ else {
     if(count($result) == 0){
         echo "No threads found";
     } else {
-        showPosts($result, $connection, $pageInfo);
+        showPosts($result, $connection);
     }
     ?>
 </div>

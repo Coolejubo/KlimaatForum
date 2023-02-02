@@ -1,6 +1,6 @@
 <?php
 // Haal de tien laatste posts op uit de database, met paginering
-function tenLatestPosts($connection, $page) {
+function tenLatestPosts($connection, $page, $topic) {
      // bereken de offset op basis van het paginanummer
     if ($page > 0) {
         $offset = ($page * 10);
@@ -8,14 +8,17 @@ function tenLatestPosts($connection, $page) {
         $offset = 0;
     }
     // Voer de query uit en haal de resultaten op uit de database
-    $result = mysqli_query($connection, 'SELECT * FROM posts ORDER BY postDate DESC LIMIT 10 OFFSET '.$offset.';');
+    $stmt = mysqli_prepare($connection, 'SELECT * FROM posts WHERE postTopic = ? ORDER BY postDate DESC LIMIT 10 OFFSET ?');
+    mysqli_stmt_bind_param($stmt, "si", $topic, $offset);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     $result = mysqli_fetch_all($result, MYSQLI_NUM);
-    // Return het resultaat
+        // Return het resultaat
     return $result;
 }
 
 // Haal de tien best beoordeelde posts op uit de database, met paginering
-function tenBestPosts($connection, $page) {
+function tenBestPosts($connection, $page, $topic) {
     // bereken de offset op basis van het paginanummer
     if ($page > 0) {
     $offset = ($page * 10);
@@ -23,9 +26,12 @@ function tenBestPosts($connection, $page) {
     $offset = 0;
     }
     // Voer de query uit en haal de resultaten op uit de database
-    $result = mysqli_query($connection, 'SELECT * FROM posts ORDER BY postLikes DESC LIMIT 10 OFFSET '.$offset.';');
+    $stmt = mysqli_prepare($connection, 'SELECT * FROM posts WHERE postTopic = ? ORDER BY postLikes DESC LIMIT 10 OFFSET ?');
+    mysqli_stmt_bind_param($stmt, "si", $topic, $offset);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     $result = mysqli_fetch_all($result, MYSQLI_NUM);
-    // Return het resultaat
+        // Return het resultaat
     return $result;
     }
     
@@ -81,7 +87,7 @@ function fetchUsername($userID, $connection) {
 
 
 /* Deze functie laat posts zien */
-function showPosts($post, $connection, $pageinfo) {
+function showPosts($post, $connection) {
 
     $lim = count($post);
     
@@ -93,7 +99,14 @@ function showPosts($post, $connection, $pageinfo) {
             <div class="message-header">
                 <h1 class="message-title"><?php echo $post[$x][2] ?></h1>
                 <div class="message-meta">
-                    <!-- haal username, de profielfoto en de datum v.d post op en laat de datum in het juiste formaat zien -->
+                    <!-- haal username,topic, de profielfoto en de datum v.d post op en laat de datum in het juiste formaat zien -->
+                    <span class="topic">
+                        <?php 
+                            require_once 'topicInfo.inc.php';
+                            $topicTitle = topicInfo($post[$x][6])[0];
+                            echo $topicTitle;
+                        ?>
+                    </span>
                     <span class="username"><?php echo fetchUsername($post[$x][0], $connection) ?></span>
                     <span class="date"><?php echo date("d-m-Y H:i", $post[$x][4]) ?></span>
                     <a href="https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/userProfile.php?userID=<?php echo $post[$x][0] ?>">
@@ -217,7 +230,14 @@ function showUserPosts($post, $connection) {
             <div class="message-header">
                 <h1 class="message-title"><?php echo $post[$x][2] ?></h1>
                 <div class="message-meta">
-                    <!-- haal username, de profielfoto en de datum v.d post op en laat de datum in het juiste formaat zien -->
+                    <!-- haal username, de topic de profielfoto en de datum v.d post op en laat de datum in het juiste formaat zien -->
+                    <span class="topic">
+                        <?php 
+                            require_once 'topicInfo.inc.php';
+                            $topicTitle = topicInfo($post[$x][6])[0];
+                            echo $topicTitle;
+                        ?>
+                    </span>
                     <span class="username"><?php echo fetchUsername($post[$x][0], $connection) ?></span>
                     <span class="date"><?php echo date("d-m-Y H:i", $post[$x][4]) ?></span>
                     <img class="profilePic" src="https://api.multiavatar.com/<?php echo fetchUsername($post[$x][0], $connection) ?>.png?apikey=FgC5ls0LaUYoKd">

@@ -16,6 +16,7 @@ if (isset($_POST['submit'])) {
     // $userID = 999;
 
     //grab data
+    $topic = $_POST["selectedTopic"];
     $title = htmlspecialchars($_POST["title"]);
     $content = htmlspecialchars($_POST["content"]);
     $userID = htmlspecialchars($_SESSION["userID"]);
@@ -30,7 +31,7 @@ if (isset($_POST['submit'])) {
     }
 
     //creeert een post.
-    createPost($connection, $title, $content, $userID);
+    createPost($connection,$topic, $title, $content, $userID);
 }
 else {
     header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/createPost/createPost.php');
