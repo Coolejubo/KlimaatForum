@@ -13,10 +13,10 @@ if (!isset($_SESSION["userID"])) {
 
 
     // verdeelt alle eigenschappen van een comment over de juiste variablen en sanitized de comments
-    $responseContent = mysqli_real_escape_string($connection, $_POST['responseContent']);
-    $postID = mysqli_real_escape_string($connection, $_POST['postID']);
-    $userID = mysqli_real_escape_string($connection, $_SESSION['userID']);
-    $parentID = mysqli_real_escape_string($connection, $_POST['parentID']);
+    $responseContent = mysqli_real_escape_string($connection, htmlspecialchars($_POST['responseContent']));
+    $postID = mysqli_real_escape_string($connection, htmlspecialchars($_POST['postID']));
+    $userID = mysqli_real_escape_string($connection, htmlspecialchars($_SESSION['userID']));
+    $parentID = mysqli_real_escape_string($connection, htmlspecialchars($_POST['parentID']));
 
     //bind parameters en insert data
     $stmt = $connection->prepare("INSERT INTO responses (responseContent, postID, userID, parentID) VALUES (?, ?, ?, ?)");

@@ -23,6 +23,9 @@
             if ($_GET["error"] == "emptyInput") {
                 echo "<p>Fill in all fields!<?p>";
             }
+            elseif ($_GET["error"] == "titleTooLong") {
+                echo "<p>The title is too long!<?p>";
+            }
         }
     ?>
     

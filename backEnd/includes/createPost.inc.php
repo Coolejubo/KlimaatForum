@@ -20,6 +20,9 @@ if (isset($_POST['submit'])) {
     $content = htmlspecialchars($_POST["content"]);
     $userID = htmlspecialchars($_SESSION["userID"]);
 
+    if (strlen($title) > 40) {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/createPost/createPost.php?error=titleTooLong');
+    }
     //we gebruiken de login functie, omdat die ook twee inputs heeft.
     if (emptyInputsLogin($title, $content) === true) {
         header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/createPost/createPost.php?error=emptyInput');
