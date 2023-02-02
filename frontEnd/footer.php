@@ -43,6 +43,7 @@ $(function () {
                     likeBtn.removeClass('unlike-btn');
                     likeBtn.addClass('like-btn');
                 } 
+
             }
             });
 
