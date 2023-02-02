@@ -309,6 +309,13 @@ function like($referenceID, $userID, $post, $connection) {
         return true;
     }
 }
+
+//DEBUG 
+// require_once 'connection.php';
+
+// like(155, 19, 1, $connection);
+
+
       
 function unlike($referenceID, $userID, $post, $connection) {
     //Met deze functie kan een user een post unliken
