@@ -1,29 +1,130 @@
 .selectPage {
-    width: 900px;
-    margin: 0 auto;
-    text-align: center;
+  width: 900px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 @media screen and (max-width: 1000px) {
-    .selectPage {
-        width: auto;
-        margin: auto;
-    }    
+  .selectPage {
+      width: auto;
+      margin: auto;
+  }    
 }
 
 .topicsGrid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+  /* .Cats {
     display: grid;
-    grid-template-columns: auto auto auto;
-}
-
-
-.gridElem {
-    background-color: darkgreen;
-    color: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 10px;
-    font-size: 30px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 7px;
+    
+  } */
+  
+  .topicsGrid {
+    background-color: rgba(255,255,255,0.6);
+    padding: 5px;
+    border-radius: 28px;
+    border: 3px;
+    border-color: darkgreen;
+    margin-top:5px;
+  }
+  
+  
+  
+  .gridElem {
     text-align: center;
+    font-size: 25px;
     text-decoration: none;
-}
+    color: black;
+    padding: 2px;
+    border-radius: 20px;
+    border: 3px solid gray;
+    margin: 10px;
+  }
+  .gridElem:hover{
+    background-color:rgba(27, 83, 108, 0.3) ;
+  }
+  
+  #Title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: black;
+    visibility: visible;
+  }
+  /* .Welcome{
+    visibility: hidden;
+  }
+  .container{
+    visibility: hidden;
+  }
+  
+  
+  @media screen and (max-width: 1200px) {
+    .container{
+      width: 80%;
+      visibility: visible;
+    }
+    .Welcome{
+      align-self: center;
+      visibility: visible;
+      text-align: center;
+      color: black;
+      font-weight: bold;
+      font-size: 30px;
+      width: 60% !important;
+      margin: 20px auto; /* add this line */ /*
+      background-color: rgba(255,255,255,0.6);
+      border-radius: 28px;
+      border: 3px;
+      border-color: darkgreen;
+      border-style: dotted;
+      
+    }
+    
+    
+    .selectPage {
+      width: auto;
+      margin: auto;
+      padding: 20px;
+      grid-template-columns: repeat(1, 1fr)
+    }    
+    .welcomeText{
+      display: none !important;
+    }
+    
+    .Cats{
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    .welcomeText{
+      margin-right: 20px;
+      align-self:center;
+    }
+    .topicsGrid{
+      margin-top: 10px;
+      margin-left: 20px;
+      margin-right: 20px;
+      height: fit-content;
+      padding-bottom: 5px;
+    }
+  }
+  
+  .welcomeText {
+      color: black !important;
+      height: fit-content;
+      grid-column: 1 / 2;
+      align-self: top;
+      justify-self: start;
+      background-color: rgba(255,255,255,0.6);;
+      padding: 5px;
+      border-radius: 28px;
+      border: 3px;
+      border-color:darkgreen;
+      border-style: dotted;
+      margin-top:5px;
+     } */

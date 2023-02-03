@@ -23,6 +23,9 @@
 				else if ($_GET["error"] == "pswsDontMatch") {
 					echo "<p>Passwords don't match!</p>";
 				}
+				else if ($_GET["error"] == "passTooShort") {
+					echo "<p>Passwords should be at least 8 charactars long.</p>";
+				}
 				else if ($_GET["error"] == "usernameExists") {
 					echo "<p>This username or email has already been used.</p>";
 				}

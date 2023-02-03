@@ -1,12 +1,17 @@
 <?php
-    //Include de header
-    include_once 'frontEnd/header.php';
+    $topicSelected = true;
 
     if (!isset($_GET['topic'])) {
         header('location: selectpage.php');
+        $topicSelected = false;
     }
 
     $topic = $_GET['topic'];
+
+    //Include de header
+    include_once 'frontEnd/header.php';
+
+
 ?>
 
 <head>

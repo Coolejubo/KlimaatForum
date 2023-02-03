@@ -6,7 +6,13 @@
 
 <head>
     <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/createPost/createPost.css">
-</head>
+    <style>
+        body{
+            background-image: none;
+            background-color: rgb(103, 169, 181);
+        }
+    </style>
+    </head>
 
 <div class="createPost">
 

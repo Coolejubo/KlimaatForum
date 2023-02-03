@@ -19,6 +19,10 @@ if (isset($_POST['submit'])) {
         header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php?error=emptyInput');
         exit();
     }
+    if (strlen($psw) < 7) {
+        header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php?error=passTooShort');
+        exit();
+    }
     // Controleren op password match en doorsturen met fout
     if (pswMatch($psw, $pswrepeat) === false) {
         header('location: https://webtech-ki46.webtech-uva.nl/frontEnd/loginStuff/signup.php?error=pswsDontMatch');

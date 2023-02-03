@@ -27,6 +27,12 @@
     <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/profilePage/editProfile.css">
     <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/homePage/home.css">
     <link rel="stylesheet" href="https://webtech-ki46.webtech-uva.nl/frontEnd/threads/posts.css">
+    <style>
+        body{
+            background-image: none;
+            background-color: rgb(103, 169, 181);
+        }
+    </style>
 </head>
 
 <div class="user-info">

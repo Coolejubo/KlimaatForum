@@ -4,9 +4,9 @@
 }
 
 .titleArea {
-    border: 3px solid hsl(138, 93%, 35%);
+    border: 2px solid darkgreen;
     border-radius: 10px;
-    background-color: rgb(245, 245, 245);
+    background-color: rgba(255, 255, 255, 0.6);
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -15,10 +15,10 @@
 }
 
 .contentArea {
-    border: 3px solid hsl(138, 93%, 35%);
+    border: 2px solid darkgreen;
     border-radius: 10px;
     width: 100%;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(255, 255, 255, 0.6);
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 10px 10px;
@@ -30,7 +30,7 @@
     border: none;
     padding: 5px;
     text-decoration: none;
-    background: hsl(138, 93%, 35%);
+    background: darkgreen;
     color: #ffffff;
     font-family: sans-serif;
     font-size: 24px;
@@ -54,4 +54,15 @@
 
 .postButton:active {
     transform: scale(0.90);
+}
+
+#topicSelect {
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+    color: darkgreen;
+    opacity: 50%;
+  
 }

@@ -54,7 +54,8 @@ Dit is de css voor de volgende en vorige pagina knoppen */
   width: 900px;
   margin: 0 auto; 
 }
-@media screen and (max-width: 925px){
+
+@media screen and (max-width: 1200){
   .messages {
     width: auto;
     margin: auto;
@@ -64,11 +65,12 @@ Dit is de css voor de volgende en vorige pagina knoppen */
   }
 }
 .message-container {
-  border: 1px solid #ccc;
+  border: 1px solid darkgreen;
   border-radius: 30px 0 30px 0;
   /* border-style: outset; DIT KAN NIET WANT DAT IS LELIJK IN SAFARI*/
   padding: 20px;
   margin-bottom: 20px;
+  background-color: rgba(255,255,255, 0.6);
 }
 .message-header {
   display: flex;
@@ -108,6 +110,7 @@ Dit is de css voor de volgende en vorige pagina knoppen */
 }
 
 .message-footer {
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;

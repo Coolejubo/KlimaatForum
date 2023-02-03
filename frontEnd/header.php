@@ -1,13 +1,31 @@
 <?php
 
     session_start();
+    $topicSelected = true;
 
+    if (!isset($_GET['topic'])) {
+        $topicSelected = false;
+    }
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
+    <style>
+        body {
+        <?php if ($topicSelected) { ?>
+            background-color: rgb(103, 169, 181);
+        <?php } else { ?>
+            background-image: url("https://webtech-ki46.webtech-uva.nl/frontEnd/backgroundupscaled.jpg");
+            background-color: #cccccc;
+            background-repeat: no-repeat;
+            background-size: cover;
+            
+
+        <?php } ?>
+        }
+    </style>
     <title>The Catalysts for Change</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +37,7 @@
     <link rel="icon" 
      type="image/png" 
      href="https://webtech-ki46.webtech-uva.nl/frontEnd/logowebsite.png">
+
 </head>
 
 <div id="cookie-consent">
